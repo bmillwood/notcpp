@@ -1,0 +1,11 @@
+This package is as much about getting people to think about ways to
+avoid using the C preprocessor, which isn't really suited to Haskell and
+never has been, as it is about genuinely providing a set of functions
+that people will use in production code.
+
+That is to say, it isn't very good.
+
+Areas of future development:
+- compatibility with older GHCs
+- catering for missing constructors we can't match against and the like
+- quasiquoters to make using the thing less painful
