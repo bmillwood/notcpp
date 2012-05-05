@@ -35,6 +35,7 @@ Source-repository head
 Library
   Exposed-modules:
      NotCPP.ScopeLookup
+     NotCPP.LookupValueName
      NotCPP.OrphanEvasion
 
   Build-depends:

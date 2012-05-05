@@ -16,36 +16,41 @@
 --
 module NotCPP.ScopeLookup (
   scopeLookup,
+  scopeLookups,
+  scopeLookup',
+  liftMaybe,
+  recoverMaybe,
   maybeReify,
+  infoToExp,
  ) where
 
 import Control.Applicative ((<$>))
 
 import Language.Haskell.TH
 
+import NotCPP.LookupValueName
+import NotCPP.Utils
+
 -- | Produces a spliceable expression which expands to 'Just val' if
 -- the given string refers to a value 'val' in scope, or 'Nothing'
 -- otherwise.
+--
+-- > 'scopeLookup' = 'fmap' 'liftMaybe' '.' 'scopeLookup''
 scopeLookup :: String -> Q Exp
-scopeLookup s = recover [| Nothing |] $ do
+scopeLookup = fmap liftMaybe . scopeLookup'
+
+-- | Finds the first string in the list that names a value, and produces
+-- a spliceable expression of that value, or reports a compile error if
+-- it fails.
+scopeLookups :: [String] -> Q Exp
+scopeLookups xs = foldr
+  (\s r -> maybe r return =<< scopeLookup' s)
+  (fail ("scopeLookups: none found: " ++ show xs))
+  xs
+
+-- | Produces @'Just' x@ if the given string names the value @x@,
+-- or 'Nothing' otherwise.
+scopeLookup' :: String -> Q (Maybe Exp)
+scopeLookup' s = recover (return Nothing) $ do
   Just n <- lookupValueName s
-  Just exp <- infoToExp <$> reify n
-  [| Just $(return exp) |]
-
--- | A useful variant of 'reify' that returns 'Nothing' instead of
--- halting compilation when an error occurs (e.g. because the given
--- name was not in scope).
-maybeReify :: Name -> Q (Maybe Info)
-maybeReify = recoverMaybe . reify
-
--- | Turns a possibly-failing 'Q' action into one returning a 'Maybe'
--- value.
-recoverMaybe :: Q a -> Q (Maybe a)
-recoverMaybe q = recover (return Nothing) (Just <$> q)
-
--- | Returns 'Just (VarE n)' if the info relates to a value called 'n',
--- or 'Nothing' if it relates to a different sort of thing.
-infoToExp :: Info -> Maybe Exp
-infoToExp (VarI n _ _ _) = Just (VarE n)
-infoToExp (DataConI n _ _ _) = Just (ConE n)
-infoToExp _ = Nothing
+  infoToExp <$> reify n
