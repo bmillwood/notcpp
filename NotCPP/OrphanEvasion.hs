@@ -33,6 +33,8 @@ import Control.Applicative
 import Language.Haskell.TH
 import Language.Haskell.TH.Syntax
 
+import NotCPP.ScopeLookup
+
 -- | An empty type used only to signify a multiparameter typeclass in
 -- 'safeInstance'.
 data MultiParams a
@@ -74,7 +76,7 @@ rollAppT = foldl AppT
 -- @['Type']@ parameters.
 safeInstance' :: Name -> Cxt -> [Type] -> Q [Dec] -> Q [Dec]
 safeInstance' cl cxt tys inst = do
-  b <- isInstance cl tys
+  b <- $(scopeLookups ["isInstance", "isClassInstance"]) cl tys
   if b
     then return []
     else do
