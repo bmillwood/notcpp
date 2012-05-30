@@ -1,7 +1,7 @@
 Cabal-Version: >= 1.6
 
 Name:     notcpp
-Version:  0.0.1
+Version:  0.1
 Category: Template Haskell
 Synopsis: Avoiding the C preprocessor via cunning use of Template Haskell
 
@@ -17,6 +17,10 @@ Description:
     trouble with CPP is it's hard to statically analyse: tools based on
     haskell-src-exts will outright refuse to parse it, for example. It
     turns out Template Haskell will do the same job in some cases.
+    .
+    notcpp is largely a proof-of-concept, experimental package: you
+    are welcome to use it if it suits you, but it may be liable to
+    change suddenly.
 
 Author:       Ben Millwood <haskell@benmachine.co.uk>
 Maintainer:   Ben Millwood <haskell@benmachine.co.uk>
