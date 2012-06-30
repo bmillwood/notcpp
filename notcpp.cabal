@@ -1,7 +1,7 @@
 Cabal-Version: >= 1.6
 
 Name:     notcpp
-Version:  0.1
+Version:  0.1.0.1
 Category: Template Haskell
 Synopsis: Avoiding the C preprocessor via cunning use of Template Haskell
 

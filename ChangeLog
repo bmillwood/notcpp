@@ -1,2 +1,11 @@
+0.1 -> 0.1.0.1:
+* Fix for cabal file
+
+0.0.1 -> 0.1:
+* Extended API: scopeLookups, scopeLookup'
+* NotCPP.LookupValueName exports lookupValueName, either from TH or a
+  "best guess"
+* Compatibility with GHC 7.0.4 and 7.2.2
+
 0.0.1:
 * Initial release
