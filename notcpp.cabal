@@ -41,6 +41,8 @@ Library
      NotCPP.ScopeLookup
      NotCPP.LookupValueName
      NotCPP.OrphanEvasion
+  Other-modules:
+     NotCPP.Utils
 
   Build-depends:
      base < 5,
