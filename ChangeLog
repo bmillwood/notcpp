@@ -1,4 +1,4 @@
-0.1.0.1 -> HEAD:
+0.1.0.1 -> 0.2:
 * Stop exporting bestValueGuess from NotCPP.LookupValueName, I couldn't
   think of a use case for it.
 * Various documentation fixes/additions.
