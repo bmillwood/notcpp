@@ -1,7 +1,6 @@
 {-# LANGUAGE TemplateHaskell #-}
 module NotCPP.LookupValueName (
-  bestValueGuess,
-  lookupValueName,
+  lookupValueName
  ) where
 
 import Language.Haskell.TH
