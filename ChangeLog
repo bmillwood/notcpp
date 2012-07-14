@@ -1,6 +1,7 @@
 0.1.0.1 -> HEAD:
 * Stop exporting bestValueGuess from NotCPP.LookupValueName, I couldn't
   think of a use case for it.
+* Various documentation fixes/additions.
 
 0.1 -> 0.1.0.1:
 * Fix for cabal file

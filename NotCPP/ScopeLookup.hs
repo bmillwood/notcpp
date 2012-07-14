@@ -14,6 +14,15 @@
 -- >     Nothing -> error
 -- >       "openState: runtime name resolution has its drawbacks :/"
 --
+-- Or, for this specific case, you can use 'scopeLookups':
+--
+-- > openState :: IO (AcidState st)
+-- > openState = open defaultState
+-- >  where
+-- >   open = $(scopeLookups ["openLocalState","openAcidState"])
+--
+-- Now if neither of the names are found then TH will throw a
+-- compile-time error.
 module NotCPP.ScopeLookup (
   scopeLookup,
   scopeLookups,
@@ -26,16 +35,16 @@ module NotCPP.ScopeLookup (
 
 import Control.Applicative ((<$>))
 
-import Language.Haskell.TH
+import Language.Haskell.TH (Q, Exp, recover, reify)
 
 import NotCPP.LookupValueName
 import NotCPP.Utils
 
--- | Produces a spliceable expression which expands to 'Just val' if
--- the given string refers to a value 'val' in scope, or 'Nothing'
+-- | Produces a spliceable expression which expands to @'Just' val@ if
+-- the given string refers to a value @val@ in scope, or 'Nothing'
 -- otherwise.
 --
--- > 'scopeLookup' = 'fmap' 'liftMaybe' '.' 'scopeLookup''
+-- @scopeLookup = 'fmap' 'liftMaybe' . 'scopeLookup''@
 scopeLookup :: String -> Q Exp
 scopeLookup = fmap liftMaybe . scopeLookup'
 

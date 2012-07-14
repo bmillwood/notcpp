@@ -21,8 +21,8 @@ maybeReify = recoverMaybe . reify
 recoverMaybe :: Q a -> Q (Maybe a)
 recoverMaybe q = recover (return Nothing) (Just <$> q)
 
--- | Returns 'Just (VarE n)' if the info relates to a value called 'n',
--- or 'Nothing' if it relates to a different sort of thing.
+-- | Returns @'Just' ('VarE' n)@ if the info relates to a value called
+-- @n@, or 'Nothing' if it relates to a different sort of thing.
 infoToExp :: Info -> Maybe Exp
 infoToExp (VarI n _ _ _) = Just (VarE n)
 infoToExp (DataConI n _ _ _) = Just (ConE n)

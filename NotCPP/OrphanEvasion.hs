@@ -19,9 +19,14 @@
 -- Now anyone importing your module is guaranteed to get an instance
 -- one way or the other.
 --
--- This module is still highly experimental. I suspect that some things
--- like recursion still won't work, because of how the names are
--- mangled. Let me know how you get on!
+-- This module is still highly experimental. The example given above
+-- does work, but anything involving type variables or complex method
+-- bodies may be less fortunate. The names of the methods are mangled
+-- a bit, so using recursion to define them may not work. Define the
+-- method outside the code and then use a simple binding as above.
+--
+-- If you use this code (successfully or unsuccessfully!), go fetch
+-- the maintainer address from the cabal file and let me know!
 module NotCPP.OrphanEvasion (
   MultiParams,
   safeInstance,
@@ -65,7 +70,7 @@ unrollAppT = go []
   go acc (AppT tc ta) = go (ta : acc) tc
   go acc ty = (ty, reverse acc)
 
--- | Left inverse to 'unrollAppT', equal to @'foldl' 'AppT'@
+-- | Left inverse to unrollAppT, equal to @'foldl' 'AppT'@
 rollAppT :: Type -> [Type] -> Type
 rollAppT = foldl AppT
 
