@@ -1,3 +1,6 @@
+0.2 -> HEAD:
+* Compatibility with GHC 7.6.1 and TH 2.8
+
 0.1.0.1 -> 0.2:
 * Stop exporting bestValueGuess from NotCPP.LookupValueName, I couldn't
   think of a use case for it.
