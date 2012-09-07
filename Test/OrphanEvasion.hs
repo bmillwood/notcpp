@@ -8,13 +8,12 @@ import Language.Haskell.TH
 import NotCPP.OrphanEvasion
 
 class C a where
-  method :: a -> ()
+  method :: a -> Bool
 
 instance C Int where
-  method _ = ()
+  method _ = True
 
-main = putStrLn $(stringE . unlines =<< mapM (fmap show) [
-    safeInstance ''C [t| Int |] [d| method = const () |],
-    safeInstance ''C [t| () |] [d| method = id |]])
-
-$(safeInstance ''C [t| () |] [d| method = id |])
+orphanTest = $(recover [| False |] $ do
+  [] <- safeInstance ''C [t| Int |] [d| method = const False |]
+  [InstanceD _ _ _] <- safeInstance ''C [t| () |] [d| method = const True |]
+  [| True |])

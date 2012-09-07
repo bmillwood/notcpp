@@ -1,4 +1,4 @@
-Cabal-Version: >= 1.6
+Cabal-Version: >= 1.9.2
 
 Name:     notcpp
 Version:  0.2
@@ -53,3 +53,10 @@ Library
 
   GHC-Options:    -W
   Hs-source-dirs: .
+
+Test-suite examples-compile
+  Type:    exitcode-stdio-1.0
+  Main-is: Test/Main.hs
+  Build-depends:
+      base < 5,
+      template-haskell >= 2.5 && < 2.9

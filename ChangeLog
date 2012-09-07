@@ -1,5 +1,6 @@
 0.2 -> HEAD:
 * Compatibility with GHC 7.6.1 and TH 2.8
+* New Cabal test-suite of sorts
 
 0.1.0.1 -> 0.2:
 * Stop exporting bestValueGuess from NotCPP.LookupValueName, I couldn't

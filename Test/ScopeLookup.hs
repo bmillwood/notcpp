@@ -1,8 +1,10 @@
 {-# LANGUAGE TemplateHaskell #-}
 module Test.ScopeLookup where
 
+import Language.Haskell.TH
+
 import NotCPP.ScopeLookup
 
-main = case $(scopeLookup "putStrLn") of
-  Nothing -> error "wat"
-  Just putStrLn -> putStrLn "hello world!"
+scopeLookupTest = $(recover [| False |] $ do
+  Just t <- scopeLookup' "True"
+  return t)
