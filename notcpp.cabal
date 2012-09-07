@@ -1,3 +1,4 @@
+-- For Test-suite support:
 Cabal-Version: >= 1.9.2
 
 Name:     notcpp
@@ -68,4 +69,8 @@ Test-suite examples-compile
       base < 5,
       template-haskell >= 2.5 && < 2.9
 
-  GHC-Options: -W
+  Extensions:
+      TemplateHaskell
+
+  GHC-Options:    -W
+  Hs-source-dirs: .
