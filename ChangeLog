@@ -1,4 +1,4 @@
-0.2 -> HEAD:
+0.2 -> 0.2.0.1:
 * Compatibility with GHC 7.6.1 and TH 2.8
 * New Cabal test-suite of sorts
 
