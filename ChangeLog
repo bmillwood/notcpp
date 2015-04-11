@@ -1,3 +1,6 @@
+0.2.0.2 -> 0.2.0.3:
+* Compatibility with GHCs 7.8 and 7.10
+
 0.2.0.1 -> 0.2.0.2:
 * Several metadata fixes
 
