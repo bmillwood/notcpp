@@ -5,6 +5,6 @@ import Language.Haskell.TH
 
 import NotCPP.ScopeLookup
 
-scopeLookupTest = $(recover [| False |] $ do
+scopeLookupTest = $(do
   Just t <- scopeLookup' "True"
   return t)
